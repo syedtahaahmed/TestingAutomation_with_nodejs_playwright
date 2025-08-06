@@ -23,14 +23,14 @@
     <script>
         async function runTests() {
             document.getElementById('status').innerText = 'Running test... please wait till the tests running completes';
-             document.querySelectorAll('.buttons-holder button').forEach(btn => btn.disabled = true);
+            //  document.querySelectorAll('.buttons-holder button').forEach(btn => btn.disabled = true);
             const res = await fetch('/run-tests');
             const data = await res.json();
             document.getElementById('status').innerText = data.success ? 'Succesflly Completed all th test cases. you can downlaod report by clicking View Report buttons' : ' Test Failed';
             document.getElementById('status').classList.add(data.success ? 'TestCompleted' : ' TestFailed')
-            if(data.success){
-            document.querySelectorAll('.buttons-holder button').forEach(btn => btn.disabled = false)
-            }
+            // if(data.success){
+            // document.querySelectorAll('.buttons-holder button').forEach(btn => btn.disabled = false)
+            // }
         }
 
         async function viewReport() {
