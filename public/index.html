@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>dynamatix playWriter </title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="parent-holder">
+        <h1>Welcome To Automation Testing</h1>
+        <div class="img-holder">
+            <img src="./gears-rotating-animation.gif" alt="Automation Gears" />
+        </div>
+        <div class="buttons-holder">
+            <button onclick="runTests()">Run Tests</button>
+            <button onclick="viewReport()">View Report</button>
+            
+        </div>
+        <div id="status"></div>
+    </div>
+    <script>
+        async function runTests() {
+            document.getElementById('status').innerText = 'Running test... please wait till the tests running completes';
+             document.querySelectorAll('.buttons-holder button').forEach(btn => btn.disabled = true);
+            const res = await fetch('/run-tests');
+            const data = await res.json();
+            document.getElementById('status').innerText = data.success ? 'Succesflly Completed all th test cases. you can downlaod report by clicking View Report buttons' : ' Test Failed';
+            document.getElementById('status').classList.add(data.success ? 'TestCompleted' : ' TestFailed')
+            if(data.success){
+            document.querySelectorAll('.buttons-holder button').forEach(btn => btn.disabled = false)
+            }
+        }
+
+        async function viewReport() {
+            const res = await fetch('/report');
+            const data = await res.json();
+            document.getElementById('status').innerText = data.success ? 'Report opened' : 'Failed to open report';
+            document.getElementById('status').classList.add(data.success ? 'TestCompleted' : ' TestFailed')
+        }
+    </script>
+</body>
+
+</html>
