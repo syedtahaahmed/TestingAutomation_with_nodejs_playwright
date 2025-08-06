@@ -12,7 +12,7 @@ const INVALID_USERNAME = process.env.INVALID_USERNAME;
 
 const { test, expect } = require('@playwright/test')
 
-test('Home page loads', async ({ page }) => {
+test('Login Check with correct creds', async ({ page }) => {
     //page to load to login to a website
     await page.goto('https://www.snapfish.com/loginto?next=https%3A%2F%2Fwww.snapfish.com%2Fhome');
 
@@ -36,7 +36,7 @@ test('Home page loads', async ({ page }) => {
 });
 
 
-test('Home page loadsasdfdf', async ({ page }) => {
+test('Login test with invalid creds', async ({ page }) => {
     //page to load to login to a website
     await page.goto('https://www.snapfish.com/loginto?next=https%3A%2F%2Fwww.snapfish.com%2Fhome');
 
